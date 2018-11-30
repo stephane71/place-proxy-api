@@ -15,9 +15,6 @@ provider:
     NODE_ENV: ${self:provider.stage}
     REGION: ${self:provider.region}
 
-  # iamManagedPolicies:
-  #   - arn:aws:iam::514894570076:policy/La-Foulee-Events-${self:provider.stage}
-
 package:
   exclude:
     - .git/**
