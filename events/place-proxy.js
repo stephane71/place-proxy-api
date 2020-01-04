@@ -1,5 +1,3 @@
-require("dotenv").config({ path: `.env.${process.env.NODE_ENV}` });
-
 const apigClientFactory = require("aws-api-gateway-client").default;
 
 const now = require("../utils/now");
@@ -14,7 +12,7 @@ const api = apigClientFactory.newClient({
 
 module.exports.handler = async (event = {}) => {
   now();
-  console.log("[La Foulee] | start place");
+  console.log("[La Foulee] Place proxy API");
 
   const { department, city } = event.pathParameters || {};
 
@@ -35,7 +33,12 @@ module.exports.handler = async (event = {}) => {
     res = await api.invokeApi(...args);
   } catch (e) {
     if (e.response.status !== 404) {
+      console.log(
+        "[La Foulee] Problem when GET a place from api",
+        e.response.status
+      );
       console.log(e);
+
       return {
         statusCode: 500
       };
@@ -66,6 +69,7 @@ module.exports.handler = async (event = {}) => {
       body: JSON.stringify(e)
     };
   }
+
   if (!details) return { statusCode: 404 };
 
   details = { ...details, slug: slugPlace };
