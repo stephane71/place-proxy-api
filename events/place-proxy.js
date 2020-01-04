@@ -12,7 +12,7 @@ const api = apigClientFactory.newClient({
   secretKey: process.env.SECRECT_ACCESS_KEY
 });
 
-module.exports.handler = async (event = {}, context, callback) => {
+module.exports.handler = async (event = {}) => {
   now();
   console.log("[La Foulee] | start place");
 
@@ -69,18 +69,10 @@ module.exports.handler = async (event = {}, context, callback) => {
   if (!details) return { statusCode: 404 };
 
   details = { ...details, slug: slugPlace };
+  
   /* INSERT in DB*/
-  try {
-    console.log("Insert", slugPlace, "in Places DB");
-    const args = [{}, `/`, "POST", {}, details];
-    res = await api.invokeApi(...args);
-  } catch (e) {
-    if (e.response.status !== 404) {
-      console.log(e);
-      // Find a way to send this problem
-      // But do not return anythings
-    }
-  }
+  const args = [{}, `/`, "POST", {}, details];
+  api.invokeApi(...args);
 
   return {
     statusCode: 200,
