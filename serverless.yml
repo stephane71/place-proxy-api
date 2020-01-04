@@ -15,7 +15,11 @@ provider:
   memorySize: 128
 
   environment:
-    REGION: ${self:provider.region}
+    ACCESS_KEY_ID: ${ssm:/dev/aws/la-foulee-api/access_key_id~true}
+    SECRECT_ACCESS_KEY: ${ssm:/dev/aws/la-foulee-api/secret_access_key~true}
+    GOOGLE_MAPS_API_KEY: ${ssm:/dev/google/maps~true}
+    ALGOLIA_APPLICATION_ID: ${ssm:/dev/algolia/application_id~true}
+    ALGOLIA_API_KEY: ${ssm:/dev/algolia/api_key~true}
 
 functions:
   place-proxy:
