@@ -3,26 +3,19 @@ service: place-proxy-api
 plugins:
   - serverless-offline
   - serverless-domain-manager
+  - serverless-dotenv-plugin
+  - serverless-plugin-common-excludes
+  - serverless-plugin-include-dependencies
 
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs10.x
   stage: ${opt:stage, "dev"}
-  region: eu-west-3
+  region: eu-west-2
   memorySize: 128
 
   environment:
-    NODE_ENV: ${self:provider.stage}
     REGION: ${self:provider.region}
-
-package:
-  exclude:
-    - .git/**
-    - .gitignore
-    - package.json
-    - package-lock.json
-    - README.md
-    - .DS_Store
 
 functions:
   place-proxy:
@@ -47,12 +40,12 @@ functions:
               paths:
                 city: true
                 department: true
-custom:
-  domains:
-    dev: dev-api.la-foulee.com
-    production: api.la-foulee.com
-  customDomain:
-    domainName: ${self:custom.domains.${self:provider.stage}}
-    basePath: "place-proxy"
-    stage: "${self:provider.stage}"
-    createRoute53Record: true
+# custom:
+#   domains:
+#     dev: dev-api.la-foulee.com
+#     production: api.la-foulee.com
+#   customDomain:
+#     domainName: ${self:custom.domains.${self:provider.stage}}
+#     basePath: "place-proxy"
+#     stage: "${self:provider.stage}"
+#     createRoute53Record: true
