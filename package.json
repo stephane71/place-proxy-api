@@ -12,7 +12,7 @@
   "dependencies": {
     "@google/maps": "^1.0.2",
     "algoliasearch": "^3.35.1",
-    "aws-api-gateway-client": "^0.3.3",
+    "aws-api-gateway-client": "^0.2.17",
     "aws-sdk": "^2.597.0",
     "moment": "^2.24.0",
     "slug": "^2.1.0"
