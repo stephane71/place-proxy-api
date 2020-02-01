@@ -1,5 +1,5 @@
 org: stephane71
-app: place-proxy-api
+app: api
 service: place-proxy-api
 
 plugins:
