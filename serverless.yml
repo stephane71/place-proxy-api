@@ -3,8 +3,7 @@ app: api
 service: place-proxy-api
 
 plugins:
-  - serverless-offline
-  - serverless-dotenv-plugin
+  - serverless-domain-manager
   - serverless-plugin-common-excludes
   - serverless-plugin-include-dependencies
 
@@ -45,3 +44,10 @@ functions:
               paths:
                 city: true
                 department: true
+
+custom:
+  customDomain:
+    domainName: api.la-foulee.com
+    basePath: "place-proxy"
+    stage: ${self:provider.stage}
+    createRoute53Record: true
